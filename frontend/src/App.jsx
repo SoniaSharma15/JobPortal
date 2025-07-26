@@ -21,7 +21,10 @@ import SavedJobs from './components/shared/Job/SavedJobs'
 function App() {
   return (
     <BrowserRouter>
-        <Navbar/> 
+    <div className="flex flex-col min-h-screen">
+              <Navbar/> 
+
+  <main className="flex-grow">
  <Routes>
   <Route path='/' element={<Home/>}/>
   <Route path='/ResumeTemplates' element={<ResumeTemplates/>}/>
@@ -40,7 +43,8 @@ function App() {
   <Route path='/admin/companies/:id' element={<CompanySetup/>}/>
  </Routes>
  <Footer/>
-
+ </main>
+</div>
     </BrowserRouter>
   )
 }

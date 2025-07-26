@@ -58,7 +58,7 @@ dispatch(setLoading(false))
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
           action=""
-          className="w-1/2 border border-gray-200 rounded-md p-6 my-10"
+          className="md:w-1/2 border border-gray-200 rounded-md p-6 my-10"
           onSubmit={submitHandler}
         >
           <h1 className="font-bold text-xl mb-4 text-center">Login</h1>

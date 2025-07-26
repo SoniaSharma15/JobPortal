@@ -21,7 +21,7 @@ const searchJobHandler=()=>{
         <span className='px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium mx-auto'>No. 1 Job Hunt Website</span>
         <h1 className='text-5xl font-bold'>Search, Apply & <br/> Get Your <span className='text-[#6a38c2]'> Dream Jobs</span></h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <div className='flex w-[40%]  shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
+        <div className='flex md:w-[40%]  shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
             <input type="text" placeholder='Find your Dream Jobs' onChange={(e)=>setQuery(e.target.value)}
             className='outline-none border-none w-full' />
             <Button className="rounded-r-full bg-[#6A38C2]" onClick={searchJobHandler}>

@@ -2,11 +2,15 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { removeJob } from "@/redux/savedJobsSlice";
+import { toast } from "sonner";
 
 function SavedJobs() {
   const savedJobs = useSelector(state => state.savedJobs);
   const dispatch = useDispatch();
-
+ const Removehandler=(id)=>{
+dispatch(removeJob(id));
+toast("Removed Successfully")
+ }
   return (
     <div>
       <h2 className="text-2xl font-bold">Saved Jobs</h2>
@@ -16,7 +20,7 @@ function SavedJobs() {
           <p>{job.description}</p>
           <Button
             variant="destructive"
-            onClick={() => dispatch(removeJob(job._id))}
+            onClick={()=>Removehandler(job._id)}
           >
             Remove
           </Button>

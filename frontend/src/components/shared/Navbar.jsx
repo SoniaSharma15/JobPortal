@@ -34,11 +34,14 @@ function Navbar() {
   };
   return (
     <div className="bg-white">
-      <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
+      <div className={`flex ${!user?'flex-col':'flex-row'} items-center justify-between mx-auto max-w-7xl h-16 my-2 `}>
         <div>
-          <h1 className="text-2xl font-bold">
-           <Link to={"/"}> Job <span className="text-[#F83002]">Portal</span>
-</Link>          </h1>
+          <h1 className="text-2xl font-bold pl-2">
+            <Link to={"/"}>
+              {" "}
+              Job <span className="text-[#F83002]">Portal</span>
+            </Link>{" "}
+          </h1>
         </div>
         <div className="flex items-center gap-5">
           <ul className="flex font-medium item center gap-5 ">
@@ -107,17 +110,15 @@ function Navbar() {
                 </div>
 
                 <div className="flex flex-col mt-2 text-gray-600 ">
-{
-  user && user.role=="student" &&(
-    <div className="flex w-fit items-center cursor-pointer">
-    <User2 />{" "}
-    <Button variant="link">
-      <Link to={"/profile"}>View Profile</Link>
-    </Button>{" "}
-  </div>
-  )
-}
-           
+                  {user && user.role == "student" && (
+                    <div className="flex w-fit items-center cursor-pointer">
+                      <User2 />{" "}
+                      <Button variant="link">
+                        <Link to={"/profile"}>View Profile</Link>
+                      </Button>{" "}
+                    </div>
+                  )}
+
                   <div className="flex w-fit items-center cursor-pointer">
                     <LogOut />{" "}
                     <Button variant="link" onClick={logoutHandler}>

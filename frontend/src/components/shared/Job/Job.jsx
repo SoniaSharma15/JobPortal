@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { saveJob } from "@/redux/savedJobsSlice";
+import { toast } from "sonner";
 
 
 
@@ -32,6 +33,11 @@ function Job({job}) {
    })
    setFilterCompany(filteredCompany)
    },[companies,searchCompanyByText])
+
+   const saveJobHandler=(job)=>{
+     dispatch(saveJob(job))
+    toast("Job Saved for Later Successfully")
+   }
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border-gray-200">
       <div className="flex items-center justify-between">
@@ -42,7 +48,6 @@ function Job({job}) {
       </div>
 
       <div className="flex items-center gap-2 my-2 ">
-        {console.log(job)}
         <div className="p-2">
           <Avatar>
             <AvatarImage
@@ -77,7 +82,7 @@ function Job({job}) {
       </div>
       <div className="flex items-center gap-4 mt-4">
         <Button variant="outline" onClick={()=>{navigate(`/description/${job?._id}`)}}>Details</Button>
-        <Button  className="bg-[#7209b7]" onClick={() => dispatch(saveJob(job))}>Save For Later</Button>
+        <Button  className="bg-[#7209b7]" onClick={() =>saveJobHandler(job)}>Save For Later</Button>
       </div>
     </div>
   );
