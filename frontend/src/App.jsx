@@ -15,7 +15,6 @@ import AdminJobs from './components/Admin/AdminJobs'
 import PostJob from './components/Admin/postJob'
 import Applicants from './components/Applicants/Applicants'
 import ProtectedRoute from './components/Admin/ProtectedRoute'
-import ResumeTemplates from "./Resume/ResumeTemplates"
 import Dashboard from './components/Dashboard/Dashboard'
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
   <main className="flex-grow">
  <Routes>
   <Route path='/' element={<Home/>}/>
-  <Route path='/ResumeTemplates' element={<ResumeTemplates/>}/>
   <Route path="/dashboard" element={<Dashboard/>} />
   <Route path='/jobs' element={<Jobs/>}/>
   <Route path='/profile' element={<Profile/>}/>
