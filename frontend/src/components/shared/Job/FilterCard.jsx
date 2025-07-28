@@ -6,6 +6,10 @@ import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
 
 const filterData = [
+  // {
+  //   filterType: "All",
+  //   array: ["All"],
+  // },
   {
     filterType: "Location",
     array: ["Delhi NCR", "Bangalore", "Hyderabad", "Pune", "Mumbai","Lucknow"],
@@ -31,10 +35,10 @@ const dispatch=useDispatch();
     <div className="w-full bg-white p-3 rounded-md ">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
       <hr className="mt-3" />
-      <RadioGroup value={selectedValue} onValueChange={filterHandler}>
+      <RadioGroup value={selectedValue} onValueChange={filterHandler} className="flex  md:flex-col">
       {filterData.map((data, index) => {
         return (
-          <div key={index}>
+          <div key={index} >
             <h1 className="font-bold text-sm md:text-lg">{data.filterType}</h1>
             {data.array.map((item,idx)=>{
               const itemId=`id${index}-${idx}`

@@ -34,7 +34,7 @@ function Navbar() {
   };
   return (
     <div className="bg-white">
-      <div className={`flex ${!user?'flex-col':'flex-row'} items-center justify-between mx-auto max-w-7xl h-16 my-2 `}>
+      <div className={`flex ${!user?'flex-col md:flex-row':'flex-col md:flex-row'} items-center justify-between mx-auto max-w-7xl h-16 my-2 `}>
         <div>
           <h1 className="text-2xl font-bold pl-2">
             <Link to={"/"}>
@@ -63,7 +63,7 @@ function Navbar() {
                   <Link to={"/jobs"}>Jobs</Link>
                 </li>
                 <li className="cursor-pointer">
-                  <Link to={"/browse"}>Browse</Link>
+                  <Link to={"/dashboard"}>Dashboard</Link>
                 </li>
               </>
             )}

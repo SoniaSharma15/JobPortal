@@ -6,7 +6,6 @@ import Login from './components/auth/Login'
 import Signup from './components/auth/Signup';
 import Footer from './components/shared/Footer'
 import Jobs from './components/Pages/Jobs'
-import Browse from './components/Pages/Browse'
 import Profile from './components/shared/Profile/Profile'
 import JobDescription from './components/Pages/JobDescription'
 import Companies from './components/shared/Companies/Companies'
@@ -17,7 +16,8 @@ import PostJob from './components/Admin/postJob'
 import Applicants from './components/Applicants/Applicants'
 import ProtectedRoute from './components/Admin/ProtectedRoute'
 import ResumeTemplates from "./Resume/ResumeTemplates"
-import SavedJobs from './components/shared/Job/SavedJobs'
+import Dashboard from './components/Dashboard/Dashboard'
+
 function App() {
   return (
     <BrowserRouter>
@@ -28,9 +28,8 @@ function App() {
  <Routes>
   <Route path='/' element={<Home/>}/>
   <Route path='/ResumeTemplates' element={<ResumeTemplates/>}/>
-  <Route path="/saved-jobs" element={<SavedJobs/>} />
+  <Route path="/dashboard" element={<Dashboard/>} />
   <Route path='/jobs' element={<Jobs/>}/>
-  <Route path='/browse' element={<Browse/>}/>
   <Route path='/profile' element={<Profile/>}/>
   <Route path='/description/:id' element={<JobDescription/>}/>
   <Route path='/login' element={<Login/>}/>

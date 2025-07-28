@@ -49,7 +49,7 @@ function AdminJobsTable() {
   }, [companies, searchCompanyByText]);
 
   return (
-    <div>
+    <div className="py-2">
       <Table>
         <TableCaption>A list of your recent posted Jobs</TableCaption>
         <TableHeader>
@@ -81,15 +81,6 @@ function AdminJobsTable() {
                         }}
                       >
                         <Edit2 />
-                        <span>Edit</span>
-                      </div>
-                      <div
-                        className=" flex items-center gap-2 w-fit cursor-pointer"
-                        onClick={() => {
-                          navigate(`/admin/jobs/${job._id}`);
-                        }}
-                      >
-                        <Eye className="w-4" />
                         <span>Edit</span>
                       </div>
                       <div

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Bookmark } from "lucide-react";
+import { Bookmark, BookmarkPlusIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
@@ -9,42 +9,57 @@ import { useDispatch } from "react-redux";
 import { saveJob } from "@/redux/savedJobsSlice";
 import { toast } from "sonner";
 
-
-
-
-function Job({job}) {
-  const navigate=useNavigate();
+function Job({ job }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const savedJobs = useSelector((state) => state.savedJobs);
 
-  const daysAgoFunction=(mongodbTime)=>{
-    const createdAt= new Date(mongodbTime);
-    const currentTime= new Date();
-    const timeDifference=currentTime-createdAt;
-    return Math.floor(timeDifference/(1000*24*60*60))
-  }
-  const {companies,searchCompanyByText}=useSelector(store=>store.company)
-  const [filterCompany,setFilterCompany]=useState(companies)
-   useEffect(()=>{
-   const filteredCompany=companies.length>=0 && companies.filter((company)=>{
-    if(!searchCompanyByText){
-      return true;
-    }
-    return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase())
-   })
-   setFilterCompany(filteredCompany)
-   },[companies,searchCompanyByText])
+  const daysAgoFunction = (mongodbTime) => {
+    const createdAt = new Date(mongodbTime);
+    const currentTime = new Date();
+    const timeDifference = currentTime - createdAt;
+    return Math.floor(timeDifference / (1000 * 24 * 60 * 60));
+  };
+  const { companies, searchCompanyByText } = useSelector(
+    (store) => store.company
+  );
+  const [filterCompany, setFilterCompany] = useState(companies);
+  useEffect(() => {
+    const filteredCompany =
+      companies.length >= 0 &&
+      companies.filter((company) => {
+        if (!searchCompanyByText) {
+          return true;
+        }
+        return company?.name
+          ?.toLowerCase()
+          .includes(searchCompanyByText.toLowerCase());
+      });
+    setFilterCompany(filteredCompany);
+  }, [companies, searchCompanyByText]);
 
-   const saveJobHandler=(job)=>{
-     dispatch(saveJob(job))
-    toast("Job Saved for Later Successfully")
-   }
+  const saveJobHandler = (job) => {
+    dispatch(saveJob(job));
+    toast("Job Saved for Later Successfully");
+  };
+  const isJobSaved = savedJobs.some((saved) => saved._id === job._id);
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border-gray-200">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">{daysAgoFunction(job?.createdAt)===0? "Today" : `${daysAgoFunction(job?.createdAt)} days ago`} </p>
-        <Button variant="outline" className="rounded-full" size="icon">
-          <Bookmark></Bookmark>
-        </Button>
+        <p className="text-sm text-gray-500">
+          {daysAgoFunction(job?.createdAt) === 0
+            ? "Today"
+            : `${daysAgoFunction(job?.createdAt)} days ago`}{" "}
+        </p>
+      <Button
+  variant="outline"
+  className="rounded-full"
+  size="icon"
+  onClick={() => saveJobHandler(job)}
+  disabled={isJobSaved}
+>  <Bookmark color={isJobSaved ? "#7209b7" : "#9CA3AF"} /> 
+</Button>
+
       </div>
 
       <div className="flex items-center gap-2 my-2 ">
@@ -57,7 +72,7 @@ function Job({job}) {
             ></AvatarImage>
           </Avatar>
         </div>
-            {/* <AvatarFallback>Logo</AvatarFallback> */}
+        {/* <AvatarFallback>Logo</AvatarFallback> */}
         <div className="px-3">
           <h1 className="font-medium">{job?.company?.name}</h1>
           <p className="text-sm text-gray-500">India</p>
@@ -66,23 +81,37 @@ function Job({job}) {
       <div>
         <h1 className="font-bold text-lg my-2"> {job?.title}</h1>
         <p className="text-sm text-gray-600">
-{job?.description?.substring(0, 40) + '...'}
-</p>
+          {job?.description?.substring(0, 40) + "..."}
+        </p>
       </div>
-      <div className="my-1"> 
+      <div className="my-1">
         <Badge className={"text-blue-700 font-bold "} variant="ghost">
-        {job?.position}Position
+          {job?.position}Position
         </Badge>
         <Badge className={" text-[#F83002]  font-bold "} variant="ghost">
-        {job?.jobType}
+          {job?.jobType}
         </Badge>
         <Badge className={"text-[#7209b7] font-bold "} variant="ghost">
-        {job?.salary}LPA
+          {job?.salary}LPA
         </Badge>
       </div>
-      <div className="flex items-center gap-4 mt-4">
-        <Button variant="outline" onClick={()=>{navigate(`/description/${job?._id}`)}}>Details</Button>
-        <Button  className="bg-[#7209b7]" onClick={() =>saveJobHandler(job)}>Save For Later</Button>
+      <div className="flex items-center gap-10 mt-4">
+        <Button
+          variant="outline"
+          onClick={() => {
+            navigate(`/description/${job?._id}`);
+          }}
+        >
+          Details
+        </Button>
+        <Button
+          className={`bg-[#7209b7] ${
+            isJobSaved ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={() => saveJobHandler(job)}
+          disabled={isJobSaved}>
+         {isJobSaved ? "Saved" : "Save For Later"}
+        </Button>
       </div>
     </div>
   );

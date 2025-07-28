@@ -8,12 +8,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
-import useGetCompanyById from "@/hooks/useGetCompanyById";
 import { Textarea } from "@/components/ui/textarea";
-function CompanySetup() {
+import useGetJobById from "@/hooks/useGetJobById";
+function AdminJobsSetup() {
   const params = useParams();
 
-  useGetCompanyById(params.id);
+  useGetJob(params.id);
 
   const [input, setInput] = useState({
     name: "",
@@ -149,4 +149,4 @@ function CompanySetup() {
   );
 }
 
-export default CompanySetup;
+export default AdminJobsSetup;
