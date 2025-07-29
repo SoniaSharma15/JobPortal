@@ -15,12 +15,12 @@ connectCloudinary()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions={
-    origin:"https://job-portal-sonia-sharmas-projects.vercel.app",
-    //origin:"http://localhost:5173",
-    credentials:true
-}
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://job-portal-sonia-sharmas-projects.vercel.app"],
+  credentials: true,
+};
 app.use(cors(corsOptions));
+
 
 const PORT=process.env.PORT;
 
@@ -30,7 +30,7 @@ app.use("/api/v1/company",companyRoute)
 app.use("/api/v1/job",JobRoute) ;
 app.use("/api/v1/applications",ApplicationRoute) ;
  
+connectDB();
 app.listen(PORT,()=>{
-    connectDB();
     console.log(`Server running at port ${PORT}`);
 })  

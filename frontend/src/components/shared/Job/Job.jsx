@@ -66,7 +66,7 @@ function Job({ job }) {
         <div className="p-2">
           <Avatar>
             <AvatarImage
-              src={`${filterCompany[0].logo}`}
+              src={`${filterCompany[0]?.logo}`}
               alt="@shadow"
               className="h-10 object-cover rounded"
             ></AvatarImage>

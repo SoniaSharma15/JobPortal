@@ -25,12 +25,12 @@ function SavedJobs() {
             className="border p-4 rounded my-2 flex justify-between text-justify items-start "
           >
             <div className="w-4/5">
-              <h3 className="font-semibold">{job.title}</h3>
+              <h3 className="font-semibold">{job?.title}</h3>
               <p>{job.description}</p>
             </div>
             <Button
               variant="destructive"
-              onClick={() => Removehandler(job._id)}
+              onClick={() => Removehandler(job?._id)}
               className="ml-4 mt-1"
             >
               Remove

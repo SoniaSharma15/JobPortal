@@ -39,8 +39,8 @@ const dispatch=useDispatch();
       {filterData.map((data, index) => {
         return (
           <div key={index} >
-            <h1 className="font-bold text-sm md:text-lg">{data.filterType}</h1>
-            {data.array.map((item,idx)=>{
+            <h1 className="font-bold text-sm md:text-lg">{data?.filterType}</h1>
+            {data?.array.map((item,idx)=>{
               const itemId=`id${index}-${idx}`
               return (
                 <div className="flex items-center space-x-2 my-2" key={idx}>
