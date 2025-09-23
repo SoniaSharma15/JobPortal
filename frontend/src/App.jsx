@@ -16,6 +16,7 @@ import PostJob from './components/Admin/postJob'
 import Applicants from './components/Applicants/Applicants'
 import ProtectedRoute from './components/Admin/ProtectedRoute'
 import Dashboard from './components/Dashboard/Dashboard'
+import EmailForm from './components/Pages/EmailForm'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
   <Route path='/login' element={<Login/>}/>
   <Route path='/signup' element={<Signup/>}/>
   <Route path='/admin/companies' element={<ProtectedRoute><Companies/></ProtectedRoute>}/>
+  <Route path='/admin/emailForm' element={<EmailForm/>}/>
   <Route path='/admin/companies/create' element={<CompanyCreate/>}/>
   <Route path='/admin/jobs' element={<AdminJobs/>}/>
   <Route path='/admin/jobs/:id/applicants' element={<Applicants/>}/>

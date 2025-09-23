@@ -57,7 +57,7 @@ function Signup() {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error?.response?.data?.message);
     } 
     finally {
       dispatch(setLoading(false));
@@ -150,7 +150,7 @@ function Signup() {
               ></Input>
             </div>
           </div>
-          {loading ? (
+         {loading ? (
             <Button className="w-full my-4">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Please wait !
@@ -159,7 +159,7 @@ function Signup() {
             <Button type="submit" className="w-full my-4">
               Signup
             </Button>
-          )}
+            )} 
          
           <span className="text-sm">Already have an account?</span>
           <span className="text-blue-500 mx-1 text-sm">

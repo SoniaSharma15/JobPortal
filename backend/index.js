@@ -8,10 +8,12 @@ import companyRoute from "./routes/company.route.js"
 import JobRoute from "./routes/job.route.js"
 import ApplicationRoute from "./routes/application.route.js"
 import connectCloudinary from "./utils/cloudinary.js";
+import notificationRoutes from './routes/notificationRoutes.js';
 dotenv.config({});
 const app=express();
 connectCloudinary()
 //middleware
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -30,6 +32,9 @@ app.use("/api/v1/company",companyRoute)
 app.use("/api/v1/job",JobRoute) ;
 app.use("/api/v1/applications",ApplicationRoute) ;
  
+
+app.use('/api/v1/notifications', notificationRoutes);
+
 connectDB();
 app.listen(PORT,()=>{
     console.log(`Server running at port ${PORT}`);

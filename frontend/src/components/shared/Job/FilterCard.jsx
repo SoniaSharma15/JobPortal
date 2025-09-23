@@ -6,10 +6,10 @@ import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
 
 const filterData = [
-  // {
-  //   filterType: "All",
-  //   array: ["All"],
-  // },
+  {
+    filterType: "All",
+    array: ["All Jobs"],
+  },
   {
     filterType: "Location",
     array: ["Delhi NCR", "Bangalore", "Hyderabad", "Pune", "Mumbai","Lucknow"],

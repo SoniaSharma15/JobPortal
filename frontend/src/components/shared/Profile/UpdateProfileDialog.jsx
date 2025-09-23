@@ -22,7 +22,6 @@ function UpdateProfileDialog({ open, setOpen }) {
   const [loading,setLoading]=useState(false);
 
   const {user}=useSelector(store=>store.auth);
-  console.log(user)
   const [input,setInput]=useState({
     fullName:user?.fullname,
     email:user?.email,

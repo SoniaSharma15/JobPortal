@@ -12,7 +12,7 @@ function LatestJobs() {
         <span className=" text-[#6a38c2]">Latest & Top </span>Job Openings
       </h1>
 
-      <div className="grid sm:grid-cols-3 gap-4 my-10">
+      <div className="grid sm:grid-cols-3 gap-4 my-10 hover:cursor-pointer">
         {allJobs?.length <= 0 ? (
           <span className="text-center text-lg font-semibold">
             No Job Available
@@ -20,7 +20,7 @@ function LatestJobs() {
         ) : (
           allJobs
             ?.slice(0, 6)
-            .map((job) => <LatestJobCards onClick={()=>navigate(`/description/${job._id}`)} key={job._id} job={job} />)
+            .map((job) => <LatestJobCards key={job._id} job={job} />)
         )}
       </div>
     </div>

@@ -39,7 +39,7 @@ function Navbar() {
           <h1 className="text-2xl font-bold pl-2">
             <Link to={"/"}>
               {" "}
-              Job <span className="text-[#F83002]">Portal</span>
+              Job <span className="text-[#fabcae]">Portal</span>
             </Link>{" "}
           </h1>
         </div>
@@ -52,6 +52,9 @@ function Navbar() {
                 </li>
                 <li className="cursor-pointer">
                   <Link to={"/admin/jobs"}>Jobs</Link>
+                </li>
+                <li className="cursor-pointer">
+                  <Link to={"/admin/emailForm"}>Email</Link>
                 </li>
               </>
             ) : (

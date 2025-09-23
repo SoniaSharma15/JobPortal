@@ -33,5 +33,16 @@ const  userSchema = new mongoose.Schema({
         default:""
       }
     }, 
+     notifications: {
+    emailAlerts: { type: Boolean, default: true },
+    smsAlerts: { type: Boolean, default: false },
+    jobCategories: [{ type: String }], // e.g., ['Frontend', 'Backend']
+    frequency: {
+      type: String,
+      enum: ['instant', 'daily', 'weekly'],
+      default: 'instant',
+    }
+  }
+
 },{timestamps:true});
 export const User = mongoose.model('User',userSchema);

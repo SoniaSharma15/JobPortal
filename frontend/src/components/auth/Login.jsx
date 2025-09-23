@@ -111,11 +111,12 @@ dispatch(setLoading(false))
               </div>
             </RadioGroup>
           </div>
-          {
+         {
             loading? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait !</Button>:  <Button type="submit" className="w-full my-4">
             Login
           </Button>
-          }
+          } 
+       
           <span className="text-sm">Don't have an account?</span>
           <span className="text-blue-500 mx-1 text-sm">
             <Link to={"/signup"}>Signup</Link>

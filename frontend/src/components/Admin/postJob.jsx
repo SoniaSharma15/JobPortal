@@ -40,7 +40,6 @@ const selectChangeHandler=(value)=>{
 
   const submitHandler=async(e)=>{
      e.preventDefault();
-     
      try {
       setLoading(true)
        const res=await axios.post(`${JOB_API_END_POINT}/post`,input,{

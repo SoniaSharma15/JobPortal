@@ -17,7 +17,7 @@ function Jobs() {
   const { allJobs, searchedQuery } = useSelector((store) => store.job);
   const [filter, setFilter] = useState(allJobs);
   useEffect(() => {
-    if (searchedQuery) {
+    if (searchedQuery && searchedQuery!="All Jobs") {
       const filter = allJobs.filter((job) => {
         return (
           job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||

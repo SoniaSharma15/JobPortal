@@ -39,12 +39,19 @@ export const postJob=async(req,res)=>{
 export const getAllJobs=async(req,res)=>{
 try {
     const keyword=req.query.keyword || "";
-    const query={
-        $or:[
-            {title:{$regex:keyword ,$options:"i"}},
-            {description:{$regex:keyword ,$options:"i"}},
-        ]
+   const query = {
+  // Use the $or operator to match documents where at least one condition is true
+  $or: [
+    {
+      // Match documents where 'title' contains the keyword (case-insensitive)
+      title: { $regex: keyword, $options: "i" }
+    },
+    {
+      // Match documents where 'description' contains the keyword (case-insensitive)
+      description: { $regex: keyword, $options: "i" }
     }
+  ]
+}
     const jobs =await Job.find(query);
     if(!jobs){
         return res.status(404).json({
