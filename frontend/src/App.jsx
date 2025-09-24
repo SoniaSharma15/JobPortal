@@ -34,7 +34,7 @@ function App() {
   <Route path='/login' element={<Login/>}/>
   <Route path='/signup' element={<Signup/>}/>
   <Route path='/admin/companies' element={<ProtectedRoute><Companies/></ProtectedRoute>}/>
-  <Route path='/admin/emailForm' element={<EmailForm/>}/>
+  <Route path='/admin/emailForm/:email' element={<EmailForm/>}/>
   <Route path='/admin/companies/create' element={<CompanyCreate/>}/>
   <Route path='/admin/jobs' element={<AdminJobs/>}/>
   <Route path='/admin/jobs/:id/applicants' element={<Applicants/>}/>

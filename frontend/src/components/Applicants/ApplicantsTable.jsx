@@ -9,6 +9,7 @@ import {
   TableCell,
 } from "../ui/table";
 import { MoreHorizontal } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useSelector } from "react-redux";
 import { APPLICATION_API_END_POINT } from "@/utils/constant";
@@ -16,10 +17,13 @@ import { toast } from "sonner";
 import { CheckCircle } from 'lucide-react';
 import { XCircle } from 'lucide-react'
 import axios from "axios";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const shortListingStatus = ["Accepted", "Rejected"];
 
 function ApplicantsTable() {
+  const navigate = useNavigate();
   const {applicants}=useSelector(store=>store.application)
    const statusHandler=async(status,id)=>{
     try {
@@ -68,6 +72,7 @@ function ApplicantsTable() {
                   <MoreHorizontal />
                 </PopoverTrigger>
                 <PopoverContent className="w-32">
+                  <Button variant="ghost" className="border-2 border-red-600" onClick={()=>{navigate(`/admin/emailForm/${item.applicant?.email}`)}}><Mail/> Email</Button>
                   {shortListingStatus.map((status, index) => {
                     return (
                       <div key={index} className="flex w-fit items-center my-2 cursor-pointer"

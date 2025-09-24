@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from "sonner";
+import { useParams } from 'react-router-dom';
 
 const EmailForm = () => {
+  const {email}=useParams();
   const [emailData, setEmailData] = useState({
-    to: '',
+    to: email || '',
     subject: '',
     message: ''
   });
@@ -15,7 +17,7 @@ const EmailForm = () => {
 
   const handleSend = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/v1/notifications/send-email', emailData,{
+      const res = await axios.post(`${NOTIFICATION_API_END_POINT}/send-email`, emailData,{
         headers: {
     'Content-Type': 'application/json'
   }

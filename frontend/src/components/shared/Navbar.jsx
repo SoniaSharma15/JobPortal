@@ -53,9 +53,7 @@ function Navbar() {
                 <li className="cursor-pointer">
                   <Link to={"/admin/jobs"}>Jobs</Link>
                 </li>
-                <li className="cursor-pointer">
-                  <Link to={"/admin/emailForm"}>Email</Link>
-                </li>
+            
               </>
             ) : (
               <>
