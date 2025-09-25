@@ -11,7 +11,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Mail } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { APPLICATION_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { CheckCircle } from 'lucide-react';
@@ -19,12 +19,15 @@ import { XCircle } from 'lucide-react'
 import axios from "axios";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import ApplicantsStatusTables from "./ApplicantsStatusTable";
+import { setAllApplicants } from "@/redux/applicationSlice";
 
 const shortListingStatus = ["Accepted", "Rejected"];
 
 function ApplicantsTable() {
   const navigate = useNavigate();
   const {applicants}=useSelector(store=>store.application)
+  const dispatch=useDispatch();
    const statusHandler=async(status,id)=>{
     try {
      const res=await axios.put(`${APPLICATION_API_END_POINT}/status/${id}/update`,{status},{
@@ -39,6 +42,7 @@ function ApplicantsTable() {
    }
   return (
     <>
+    <ApplicantsStatusTables/>
       <Table>
         <TableCaption>A list of your recent applied users</TableCaption>
         <TableHeader>
