@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllApplicants } from '@/redux/applicationSlice'
+import ApplicantsStatusTables from './ApplicantsStatusTable'
 
 function Applicants() {
  const params=useParams()
@@ -20,7 +21,7 @@ useEffect(() => {
         dispatch(setAllApplicants(res.data.job))
       }
     } catch (error) {
-      console.log(error)
+      console.log("Applicants :"+error)
       toast.error(error)
     }
   }

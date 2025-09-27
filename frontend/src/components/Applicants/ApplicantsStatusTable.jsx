@@ -10,11 +10,11 @@ import {
 import { Mail } from "lucide-react";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function ApplicantsStatusTables() {
   const { applicants } = useSelector((store) => store.application);
   const navigate = useNavigate();
-
   const pending = applicants?.applications?.filter(app => app.status === "pending") || [];
   const accepted = applicants?.applications?.filter(app => app.status === "accepted") || [];
   const rejected = applicants?.applications?.filter(app => app.status === "rejected") || [];
