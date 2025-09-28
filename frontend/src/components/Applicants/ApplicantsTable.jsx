@@ -59,7 +59,7 @@ ${applicants?.company?.location}`;
           'Content-Type': 'application/json'
         }
       });
-
+      await axios.get(`${APPLICATION_API_END_POINT}/get`, { withCredentials: true });
     } catch (err) {
       console.error('Error sending email:', err);
       toast.error('Failed to send email');
@@ -92,13 +92,13 @@ ${applicants?.company?.location}`;
            applicants && applicants?.applications?.map((item)=>{
             return(
 <>         
-<tr key={item.applicant?._id}>
-<TableCell>{item.applicant?.fullname}</TableCell>
-            <TableCell>{item.applicant?.email}</TableCell>
-            <TableCell>{item.applicant?.phoneNumber}</TableCell>
+<tr key={item?.applicant?._id}>
+<TableCell>{item?.applicant?.fullname}</TableCell>
+            <TableCell>{item?.applicant?.email}</TableCell>
+            <TableCell>{item?.applicant?.phoneNumber}</TableCell>
             <TableCell>
-              {item.applicant?.profile?.resumeOriginalName?
-               <a className="text-blue-600 cursor-pointer " href={item.applicant?.profile?.resume}>{item.applicant?.profile?.resumeOriginalName}</a>:<span>NA</span>
+              {item?.applicant?.profile?.resumeOriginalName?
+               <a className="text-blue-600 cursor-pointer " href={item?.applicant?.profile?.resume}>{item?.applicant?.profile?.resumeOriginalName}</a>:<span>NA</span>
               }</TableCell>
             <TableCell>{item?.applicant?.createdAt?.split("T")[0]}</TableCell>
             <TableCell className="float-right">
@@ -109,7 +109,7 @@ ${applicants?.company?.location}`;
                 <PopoverContent className="w-32">
                       {shortListingStatus.map((status, index) => {
                       return (
-                      <div key={index} className="flex w-fit items-center my-2 cursor-pointer"
+                      <div key={index} className="flex w-fit item?s-center my-2 cursor-pointer"
                       onClick={()=>statusHandler(status,item?._id,item?.applicant?.fullname,item?.applicant?.email)}
                       >
                       {(status==="Accepted")?

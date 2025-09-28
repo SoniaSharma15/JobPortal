@@ -29,7 +29,6 @@ function JobDescription() {
           withCredentials: true,
         });
         if (res.data.success) {
-          toast.success(res?.data?.message)
           dispatch(setSingleJob(res.data.job));
           setIsApplied(
             res.data.job.applications.some(
@@ -60,7 +59,7 @@ function JobDescription() {
         dispatch(setSingleJob(updateSingleJob));
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.msg);
     }
   };
 

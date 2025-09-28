@@ -14,11 +14,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Edit2, Eye } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Edit2, Eye, Trash2Icon } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { JOB_API_END_POINT } from "@/utils/constant";
+import axios from "axios";
+import { toast } from "sonner";
+import useGetAllJobs from "@/hooks/useGetAllJobs";
 
 function AdminJobsTable() {
   const { companies, searchCompanyByText } = useSelector(
@@ -26,7 +41,20 @@ function AdminJobsTable() {
   );
   const { allAdminJobs, searchJobsByText } = useSelector((store) => store.job);
   const [filterJobs, setFilterJobs] = useState(allAdminJobs);
-
+  const handleDeleteJob = async (id) => {
+    try {
+      const res = await axios.delete(`${JOB_API_END_POINT}/delete/${id}`, {
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        await axios.get(`${JOB_API_END_POINT}/get`, { withCredentials: true });
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.log(error);
+    }
+  };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,6 +120,36 @@ function AdminJobsTable() {
                         <Eye className="w-4" />
                         <span>Applicants</span>
                       </div>
+                         <AlertDialog>
+                            <AlertDialogTrigger>
+                              <div className=" flex items-center gap-2 w-fit cursor-pointer ">
+                                <span>
+                                  <Trash2Icon className="text-red-500" />
+                                </span>
+                                <span>Delete</span>
+                              </div>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  Are you absolutely sure?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will
+                                  permanently delete your Job and remove
+                                  applicants related to this Job.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction onClick={()=>{handleDeleteJob(job._id)}}>
+                                  <Trash2Icon
+                                    className="text-white "
+                                  />
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                     </PopoverContent>
                   </Popover>
                 </TableCell>

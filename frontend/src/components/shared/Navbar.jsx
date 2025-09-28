@@ -14,23 +14,25 @@ import { toast } from "sonner";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setAuthUser } from "@/redux/authSlice";
 import axios from "axios";
+import localStorage from "redux-persist/es/storage";
 
 function Navbar() {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logoutHandler = async () => {
-    try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`);
-      if (res.data.success) {
-        dispatch(setAuthUser(null));
-        navigate("/");
-        toast.success(res?.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+const logoutHandler = async () => {
+  try {
+    const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+    if (res.data.success) {
+      dispatch(setAuthUser(null));
+      localStorage.removeItem("token"); // if you're using it
+      navigate("/");
+      toast.success(res.data.message);
     }
+  } catch (error) {
+    console.log(error);
+    toast.error(error.response?.data?.message || "Logout failed");
+  }
   };
   return (
     <div className="bg-white">
@@ -57,20 +59,21 @@ function Navbar() {
               </>
             ) : (
               <>
-                <li className="cursor-pointer">
+                <li className="cursor-pointer ml-1">
                   <Link to={"/"}>Home</Link>
                 </li>
                 <li className="cursor-pointer">
                   <Link to={"/jobs"}>Jobs</Link>
                 </li>
-                <li className="cursor-pointer">
+             
+                {user &&    <li className="cursor-pointer">
                   <Link to={"/dashboard"}>Dashboard</Link>
-                </li>
+                </li>}
               </>
             )}
           </ul>
           {!user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1 md:gap-4">
               <Link to={"/login"}>
                 <Button
                   variant="outline"
@@ -80,7 +83,7 @@ function Navbar() {
                 </Button>
               </Link>
               <Link to={"/signup"}>
-                <Button className="bg-[#6A38C2] hover:bg-[#a1270c] transition-all duration-400">
+                <Button className="bg-[#6A38C2] hover:bg-[#a1270c] transition-all duration-400 mr-2">
                   Signup
                 </Button>
               </Link>
