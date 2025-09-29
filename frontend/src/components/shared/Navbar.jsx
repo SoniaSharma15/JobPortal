@@ -41,7 +41,7 @@ const logoutHandler = async () => {
           <h1 className="text-2xl font-bold pl-2">
             <Link to={"/"}>
               {" "}
-              Job <span className="text-[#eb5432]">Portal</span>
+              Rise <span className="text-[#eb5432]">Hire</span>
             </Link>{" "}
           </h1>
         </div>

@@ -22,7 +22,7 @@ function SavedJobs() {
         savedJobs.map((job) => (
           <div
             key={job._id}
-            className="border p-4 rounded my-2 flex justify-between text-justify items-start "
+            className="border p-4 rounded my-2 flex flex-col md:flex-row justify-between text-justify items-start  "
           >
             <div className="w-4/5">
               <h3 className="font-semibold">{job?.title}</h3>

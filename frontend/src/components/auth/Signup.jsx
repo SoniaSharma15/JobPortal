@@ -64,6 +64,7 @@ function Signup() {
     }
   };
   useEffect(() => {
+    dispatch(setLoading(false));
     if (user) navigate("/");
   }, []);
   return (

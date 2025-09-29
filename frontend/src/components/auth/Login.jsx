@@ -6,53 +6,53 @@ import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import {USER_API_END_POINT} from "../../utils/constant.js";
+import { USER_API_END_POINT } from "../../utils/constant.js";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser, setLoading } from "@/redux/authSlice";
 import store from "@/redux/store";
 import { Loader2 } from "lucide-react";
-toast
+toast;
 function Login() {
-   const navigate=useNavigate();
-  const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     email: "",
     password: "",
     role: "",
   });
- 
-  const {loading,user}=useSelector(store=>store.auth);
+
+  const { loading, user } = useSelector((store) => store.auth);
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
- 
-  const submitHandler=async(e)=>{
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     try {
       dispatch(setLoading(true));
-      const res=await axios.post(`${USER_API_END_POINT}/login`,input,{
-        headers:{
-          "Content-Type":"application/json"
+      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+        headers: {
+          "Content-Type": "application/json",
         },
-        withCredentials:true,
+        withCredentials: true,
       });
-      if (res.data.success){
+      if (res.data.success) {
         dispatch(setAuthUser(res.data.user));
         toast.success(res?.data?.message);
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
     }
-    finally{
-dispatch(setLoading(false))
-    }
-  }
+  };
   useEffect(() => {
-     if(user) navigate("/")
-  }, [])
-  
+    if (user) navigate("/");
+    dispatch(setLoading(false));
+  }, []);
+
   return (
     <>
       <div className="flex items-center justify-center max-w-7xl mx-auto">
@@ -62,7 +62,7 @@ dispatch(setLoading(false))
           onSubmit={submitHandler}
         >
           <h1 className="font-bold text-xl mb-4 text-center">Login</h1>
-      
+
           <div className="my-2">
             <Label>Email</Label>
             <Input
@@ -73,7 +73,7 @@ dispatch(setLoading(false))
               value={input.email}
             />
           </div>
-       
+
           <div className="my-2">
             <Label>Password</Label>
             <Input
@@ -111,12 +111,17 @@ dispatch(setLoading(false))
               </div>
             </RadioGroup>
           </div>
-         {
-            loading? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait !</Button>:  <Button type="submit" className="w-full my-4">
-            Login
-          </Button>
-          } 
-       
+          {loading ? (
+            <Button className="w-full my-4">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait !
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full my-4">
+              Login
+            </Button>
+          )}
+
           <span className="text-sm">Don't have an account?</span>
           <span className="text-blue-500 mx-1 text-sm">
             <Link to={"/signup"}>Signup</Link>
