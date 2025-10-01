@@ -71,6 +71,7 @@ function Login() {
               onChange={changeEventHandler}
               name="email"
               value={input.email}
+              required
             />
           </div>
 
@@ -82,6 +83,8 @@ function Login() {
               onChange={changeEventHandler}
               name="password"
               value={input.password}
+                            required
+
             />
           </div>
 

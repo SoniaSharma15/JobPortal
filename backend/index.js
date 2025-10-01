@@ -17,12 +17,27 @@ connectCloudinary()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions = {
-  origin: ["http://localhost:5173", "https://job-portal-sonia-sharmas-projects.vercel.app"],
-  // origin: ["https://job-portal-sonia-sharmas-projects.vercel.app"],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   // origin: ["http://localhost:5173", "https://job-portal-sonia-sharmas-projects.vercel.app"],
+//   origin: ["https://job-portal-sonia-sharmas-projects.vercel.app"],
+//   credentials: true,
+// };
+// app.use(cors(corsOptions));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://job-portal-sonia-sharmas-projects.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 
 
 const PORT=process.env.PORT;

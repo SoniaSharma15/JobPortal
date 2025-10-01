@@ -99,7 +99,8 @@ function AdminJobsSetup() {
               type="text"
               name="name"
               value={input.name}
-              onChange={changeEventHandler}
+              onChange={changeEventHandler}              required
+
             />
           </div>
           <div>
@@ -108,7 +109,8 @@ function AdminJobsSetup() {
               type="text"
               name="website"
               value={input.website}
-              onChange={changeEventHandler}
+              onChange={changeEventHandler}              required
+
             />
           </div>
           <div>
@@ -117,12 +119,14 @@ function AdminJobsSetup() {
               type="text"
               name="location"
               value={input.location}
-              onChange={changeEventHandler}
+              onChange={changeEventHandler}              required
+
             />
           </div>
           <div>
             <Label>Logo</Label>
-            <Input type="file" accept="image/*" onChange={changeFileHandler} />
+            <Input type="file" accept="image/*" onChange={changeFileHandler}               required
+ />
           </div>
         </div>
         <div className="my-10">

@@ -99,7 +99,8 @@ function CompanySetup() {
               type="text"
               name="name"
               value={input.name}
-              onChange={changeEventHandler}
+              onChange={changeEventHandler}               required
+
             />
           </div>
           <div>
@@ -108,7 +109,8 @@ function CompanySetup() {
               type="text"
               name="website"
               value={input.website}
-              onChange={changeEventHandler}
+              onChange={changeEventHandler}               required
+
             />
           </div>
           <div>
@@ -118,11 +120,14 @@ function CompanySetup() {
               name="location"
               value={input.location}
               onChange={changeEventHandler}
+                            required
+
             />
           </div>
           <div>
             <Label>Logo</Label>
-            <Input type="file" accept="image/*" onChange={changeFileHandler} />
+            <Input type="file" accept="image/*" onChange={changeFileHandler}               required
+ />
           </div>
         </div>
         <div className="my-10">
@@ -133,6 +138,8 @@ function CompanySetup() {
             value={input.description}
             onChange={changeEventHandler}
             placeholder="Type your Description"
+                          required
+
           />
         </div>
         {loading ? (

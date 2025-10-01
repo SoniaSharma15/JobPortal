@@ -83,6 +83,8 @@ function Signup() {
               onChange={changeEventHandler}
               name="fullname"
               value={input.fullname}
+                            required
+
             />
           </div>
           <div className="my-2">
@@ -93,6 +95,8 @@ function Signup() {
               onChange={changeEventHandler}
               name="email"
               value={input.email}
+                            required
+
             />
           </div>
           <div className="my-2">
@@ -103,6 +107,8 @@ function Signup() {
               onChange={changeEventHandler}
               name="phoneNumber"
               value={input.phoneNumber}
+                            required
+
             />
           </div>
           <div className="my-2">
@@ -113,6 +119,8 @@ function Signup() {
               onChange={changeEventHandler}
               name="password"
               value={input.password}
+                            required
+
             />
           </div>
 
@@ -148,6 +156,8 @@ function Signup() {
                 type="file"
                 className="cursor-pointer"
                 onChange={changeFileHandler}
+                              required
+
               ></Input>
             </div>
           </div>

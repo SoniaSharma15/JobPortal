@@ -59,7 +59,7 @@ const handleGenerateEmail=async()=>{
      const InputPrompt =
       `Draft an email using this detail ${emailAbout}.Email must be professional and according to Indian standard email format.THis email was drafted by a Rectruiter to the applicant.The details about the job are as follows:${singleJob.description,singleJob.requirment,singleJob.location}Output Format must be like this only:` +
       "```json {'draft': ''}";
-    const genAI = new GoogleGenerativeAI("AIzaSyAWGfYnKpANqce5eI-FYpyL-b8GHGJHyCc"
+    const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY
     ); 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent(InputPrompt);
