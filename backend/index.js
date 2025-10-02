@@ -25,22 +25,24 @@ app.use(cookieParser());
 // app.use(cors(corsOptions));
 // const cors = require('cors');
 
-const allowedOrigins = [
-  "https://job-portal-sonia-sharmas-projects.vercel.app",
-  "http://localhost:5173",
-  "https://risehire.vercel.app"
-];
-
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
+    const allowedOrigins = [
+      "https://job-portal-sonia-sharmas-projects.vercel.app",
+      "http://localhost:5173",
+      "https://risehire.vercel.app"
+    ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true // Allow cookies to be sent
-}));
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // ✅ Use same config here
 
 app.options('*', cors());
 const PORT=process.env.PORT;
