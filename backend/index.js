@@ -23,9 +23,12 @@ app.use(cookieParser());
 //   credentials: true,
 // };
 // app.use(cors(corsOptions));
+// const cors = require('cors');
+
 const allowedOrigins = [
+  "https://job-portal-sonia-sharmas-projects.vercel.app",
   "http://localhost:5173",
-  "https://job-portal-sonia-sharmas-projects.vercel.app"
+  "https://risehire.vercel.app"
 ];
 
 app.use(cors({
@@ -35,8 +38,7 @@ app.use(cors({
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  },
-  credentials: true
+  }
 }));
 
 
