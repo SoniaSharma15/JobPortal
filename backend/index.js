@@ -38,10 +38,11 @@ app.use(cors({
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  }
+  },
+  credentials: true // Allow cookies to be sent
 }));
 
-
+app.options('*', cors());
 const PORT=process.env.PORT;
 
 //api's
