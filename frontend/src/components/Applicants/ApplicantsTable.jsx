@@ -61,7 +61,6 @@ ${applicants?.company?.location}`;
       });
       await axios.get(`${APPLICATION_API_END_POINT}/get`, { withCredentials: true });
     } catch (err) {
-      console.error('Error sending email:', err);
       toast.error('Failed to send email');
     }
 

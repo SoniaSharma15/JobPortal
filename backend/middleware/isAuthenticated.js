@@ -7,14 +7,14 @@ const isAuthenticated=async(req,res,next)=>{
         const token=req.cookies.token;
         if(!token){
             return res.status(401).json({
-                msg:"Unauthorized Access ",
+                message:"Unauthorized Access ",
                 success:false
             })
         }
         const decode= jwt.verify(token,process.env.SECRET_KEY);
         if(!decode){
             return res.status(401).json({
-                msg:"Invalid Token",
+                message:"Invalid Token",
                 success:false
             })
         }

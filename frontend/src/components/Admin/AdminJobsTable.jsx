@@ -39,7 +39,15 @@ function AdminJobsTable() {
   const { companies, searchCompanyByText } = useSelector(
     (store) => store.company
   );
-  const { allAdminJobs, searchJobsByText } = useSelector((store) => store.job);
+ const { allAdminJobs } = useSelector((store) => store.job);
+
+useEffect(() => {
+  const filteredJobs = allAdminJobs.filter((job) =>
+    job?.company?.name?.toLowerCase().includes(searchCompanyByText?.toLowerCase() || '')
+  );
+  setFilterJobs(filteredJobs);
+}, [allAdminJobs, searchCompanyByText]);
+
   const [filterJobs, setFilterJobs] = useState(allAdminJobs);
   const handleDeleteJob = async (id) => {
     try {
@@ -51,31 +59,13 @@ function AdminJobsTable() {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.message);
       console.log(error);
     }
   };
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const filteredCompany =
-      allAdminJobs?.length >= 0 &&
-      allAdminJobs.filter((job) => {
-        if (!searchJobsByText) {
-          return true;
-        }
-        return (
-          job?.title
-            ?.toLowerCase()
-            .includes(searchCompanyByText.toLowerCase()) ||
-          job?.company?.name
-            .toLowerCase()
-            .includes(searchJobsByText.toLowerCase())
-        );
-      });
-    setFilterJobs(filteredCompany);
-  }, [companies, searchCompanyByText]);
-
+ 
   return (
     <div className="py-2">
       <Table>
@@ -102,16 +92,7 @@ function AdminJobsTable() {
                       <MoreHorizontal />
                     </PopoverTrigger>
                     <PopoverContent className="w-32">
-                      <div
-                        className=" flex items-center gap-2 w-fit cursor-pointer"
-                        onClick={() => {
-                          navigate(`/admin/jobs/${job._id}`);
-                        }}
-                      >
-                        <Edit2 />
-                        <span>Edit</span>
-                      </div>
-                      <div
+                        <div
                         className=" flex items-center gap-2 w-fit cursor-pointer"
                         onClick={() => {
                           navigate(`/admin/jobs/${job._id}/applicants`);

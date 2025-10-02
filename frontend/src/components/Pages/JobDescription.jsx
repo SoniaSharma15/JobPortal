@@ -37,7 +37,7 @@ function JobDescription() {
           );
         }
       } catch (error) {
-        toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
         console.log(error);
       }
     };
@@ -59,7 +59,7 @@ function JobDescription() {
         dispatch(setSingleJob(updateSingleJob));
       }
     } catch (error) {
-      toast.error(error.response.data.msg);
+      toast.error(error?.response?.data?.message);
     }
   };
 

@@ -21,8 +21,7 @@ useEffect(() => {
         dispatch(setAllApplicants(res.data.job))
       }
     } catch (error) {
-      console.log("Applicants :"+error)
-      toast.error(error)
+      toast.error(error?.response?.data?.message);
     }
   }
   fetchAllApplicants()

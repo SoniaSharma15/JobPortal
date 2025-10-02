@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setSearchedQuery } from '@/redux/jobSlice'
-import { useNavigate } from 'react-router-dom'
+import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
 function HeroicSection() {
 
-  const [query,setQuery]=useState("")
+  useGetAllAdminJobs();
   const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const [query,setQuery]=useState("")
+
+const {searchedQuery}=useSelector((store)=>store.job)
 const searchJobHandler=()=>{
   dispatch(setSearchedQuery(query));
-  navigate("/browse")
 }
 
   return (

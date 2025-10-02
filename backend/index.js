@@ -1,6 +1,5 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors  from 'cors'
 import dotenv from "dotenv"
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
@@ -9,6 +8,7 @@ import JobRoute from "./routes/job.route.js"
 import ApplicationRoute from "./routes/application.route.js"
 import connectCloudinary from "./utils/cloudinary.js";
 import notificationRoutes from './routes/notificationRoutes.js';
+import cors from 'cors';
 dotenv.config({});
 const app=express();
 connectCloudinary()
@@ -23,7 +23,6 @@ app.use(cookieParser());
 //   credentials: true,
 // };
 // app.use(cors(corsOptions));
-// const cors = require('cors');
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -44,7 +43,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // ✅ Use same config here
 
-app.options('*', cors());
 const PORT=process.env.PORT;
 
 //api's

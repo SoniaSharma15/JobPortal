@@ -39,6 +39,7 @@ export const register = async (req, res) => {
     console.log(error);
   }
 };
+
 export const login = async (req, res) => {
   try {
     const { email,  password, role } = req.body;
@@ -52,19 +53,19 @@ export const login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ message: "Incorrect email or Password", success: false });
+        .json({ message: "No User exist with this email !", success: false });
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       return res
         .status(400)
-        .json({ message: "Incorrect email or Password", success: false });
+        .json({ message: "Invalid Credentials !", success: false });
     }
     //check role is correct or not
  if(role!= user.role){
     return res
       .status(400)
-      .json({ message: "Account doesn't exists with this role", success: false });
+      .json({ message: "Account doesn't exists with this role !", success: false });
   }
   const tokenData={userId:user._id }
   

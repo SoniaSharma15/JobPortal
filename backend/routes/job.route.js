@@ -9,4 +9,5 @@ router.route("/getadminjobs").get(isAuthenticated,getAdminJobs)
 router.route("/get/:id").get(getJobById)
 router.route("/delete/:id").delete(isAuthenticated,deleteJob);
 
+
 export default router;
