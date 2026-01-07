@@ -36,38 +36,83 @@ export const postJob=async(req,res)=>{
 
 
 //student search 
-export const getAllJobs=async(req,res)=>{
-try {
-    const keyword=req.query.keyword || "";
-   const query = {
-  // Use the $or operator to match documents where at least one condition is true
-  $or: [
-    {
-      // Match documents where 'title' contains the keyword (case-insensitive)
-      title: { $regex: keyword, $options: "i" }
-    },
-    {
-      // Match documents where 'description' contains the keyword (case-insensitive)
-      description: { $regex: keyword, $options: "i" }
+// export const getAllJobs=async(req,res)=>{
+// try {
+//     const keyword=req.query.keyword?.trim() || "";
+// let query={}
+//  if(keyword){  query = {
+//   // Use the $or operator to match documents where at least one condition is true
+//   $or: [
+//     {
+//       // Match documents where 'title' contains the keyword (case-insensitive)
+//       title: { $regex: keyword, $options: "i" }
+//     },
+//     {
+//       // Match documents where 'description' contains the keyword (case-insensitive)
+//       description: { $regex: keyword, $options: "i" }
+//     }
+//   ]
+// }}
+//     const jobs =await Job.find(query);
+//     if(jobs.length===0){
+//         return res.status(404).json({
+//             message:"Jobs not found",
+//             success:false
+//         })
+//     }
+//     return res.status(200).json({
+//         jobs,
+//         success:true,
+//         message:"Jobs retrieved successfully"
+//     })
+// } catch (error) {
+//   console.log(error)
+//     return res.status(500).json({
+//       message: "Server error",
+//       success: false,
+//     });  
+// }
+// }
+
+export const getAllJobs = async (req, res) => {
+  try {
+    const keyword = req.query.keyword;
+
+    let jobs;
+
+    // ✅ CASE 1: No keyword OR Clear Filter
+    if (
+      !keyword ||
+      keyword.trim() === "" ||
+      keyword.toLowerCase() === "clear filter" ||
+      keyword.toLowerCase() === "clear filters"
+    ) {
+      jobs = await Job.find().sort({ createdAt: -1 });
+    } 
+    // ✅ CASE 2: Normal search
+    else {
+      jobs = await Job.find({
+        $or: [
+          { title: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+        ],
+      }).sort({ createdAt: -1 });
     }
-  ]
-}
-    const jobs =await Job.find(query);
-    if(!jobs){
-        return res.status(404).json({
-            message:"Jobs not found",
-            success:false
-        })
-    }
+
     return res.status(200).json({
-        jobs,
-        success:true,
-        message:"Jobs retrieved successfully"
-    })
-} catch (error) {
-  console.log(error)  
-}
-}
+      success: true,
+      jobs,
+    });
+  } catch (error) {
+    console.error("getAllJobs error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
 
 
 //student 

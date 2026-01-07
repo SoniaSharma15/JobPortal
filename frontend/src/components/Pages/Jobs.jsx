@@ -44,6 +44,7 @@ function Jobs() {
       const selectedLocations = searchedQuery?.filters?.Location || [];
       const [minSalary, maxSalary] = searchedQuery?.salary || [0, 100];
 
+
       const filtered = allJobs.filter((job) => {
         const jobTitle = job.title?.toLowerCase() || "";
         const jobLocation = job.location?.toLowerCase() || "";
@@ -90,7 +91,6 @@ function Jobs() {
         >
           <FilterCard />
         </div>
-
         {/* Job Cards */}
         {filter?.length <= 0 ? (
           <span className="text-medium space-x-2">Job Not Found</span>

@@ -93,7 +93,7 @@ const logoutHandler = async () => {
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src={`${user.profile.profilePhoto}`}
+                    src={`${user?.profile?.profilePhoto}`}
                     alt="@shadcn"
                   />
                   <AvatarFallback>User</AvatarFallback>
@@ -102,7 +102,7 @@ const logoutHandler = async () => {
               <PopoverContent className="w-80 ">
                 <div className="flex gap-4 ">
                   <Avatar className="cursor-pointer">
-                    <AvatarImage src={`${user.profile.profilePhoto}`} />
+                    <AvatarImage src={`${user?.profile?.profilePhoto}`} />
                     <AvatarFallback>User</AvatarFallback>
                   </Avatar>
                   <div>
